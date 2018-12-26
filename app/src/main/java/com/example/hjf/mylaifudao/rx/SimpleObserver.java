@@ -10,6 +10,8 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author heJianfeng
  * @date 2018/12/19
+ *
+ * 对数据做处理
  */
 public class SimpleObserver<T> implements Observer<T> {
 

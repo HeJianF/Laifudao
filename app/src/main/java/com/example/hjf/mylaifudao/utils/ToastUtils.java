@@ -11,7 +11,7 @@ import com.example.hjf.mylaifudao.app.MyApplication;
  */
 public class ToastUtils {
 
-    private static Toast toast;
+    private static Toast toast = null;
 
     @SuppressLint("ShowToast")
     public static void showToast(String message) {

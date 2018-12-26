@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.hjf.mylaifudao.R;
 import com.example.hjf.mylaifudao.been.ImageInfo;
 import com.example.hjf.mylaifudao.been.LfdInfo;
@@ -26,8 +27,12 @@ public class ImageViewHolder extends BaseViewHolder<LfdInfo> implements View.OnC
     @BindView(R.id.image_image)
     ImageView image;
 
+    private RequestOptions options;
+
     public ImageViewHolder(@NonNull ViewGroup viewGroup, View.OnClickListener listener) {
         super(R.layout.image_item, viewGroup, listener, true);
+        options = new RequestOptions()
+                .placeholder(R.mipmap.ic_launcher);
     }
 
     @Override
@@ -39,7 +44,7 @@ public class ImageViewHolder extends BaseViewHolder<LfdInfo> implements View.OnC
             title.setText(info.getTitle());
             Glide.with(itemView.getContext()).
                     load(info.getSourceurl())
-                    .placeholder(R.mipmap.ic_launcher)
+                    .apply(options)
                     .into(image);
             title.setOnClickListener(this);
             image.setOnClickListener(this);
@@ -59,6 +64,7 @@ public class ImageViewHolder extends BaseViewHolder<LfdInfo> implements View.OnC
             case R.id.image_image:
                 Log.d("ImageViewHolder", "onClick: 图片笑话：内容");
                 break;
+            default:
         }
         mListener.onClick(v);
     }

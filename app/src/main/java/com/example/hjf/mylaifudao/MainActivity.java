@@ -28,7 +28,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BaseAdapter.OnAdapterErrorListener {
 
-    private RecyclerView recyclerView;
     private LfdAdapter mLfdAdapter;
 
     @Override
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.test_recycler);
+        RecyclerView recyclerView = findViewById(R.id.test_recycler);
         mLfdAdapter = new LfdAdapter(this);
         mLfdAdapter.setErrorListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -48,14 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void loadData() {
         final JokeApi jokeApi = Retrofit2Create.LAI_FU_DAO.create(JokeApi.class);
 
-        Observable.zip(jokeApi.getTextData(), jokeApi.getImageData(), new BiFunction<List<TextInfo>, List<ImageInfo>, List<LfdInfo>>() {
-            @Override
-            public List<LfdInfo> apply(List<TextInfo> jokeInfos, List<ImageInfo> jokeImageInfos) {
-                //数据转换
-                List<LfdInfo> lfdInfos = new ArrayList<>();
-                ModelCommon.lfdResult(lfdInfos, jokeInfos, jokeImageInfos);
-                return lfdInfos;
-            }
+        Observable.zip(jokeApi.getTextData(), jokeApi.getImageData(), (jokeInfos, jokeImageInfos) -> {
+            //数据转换
+            List<LfdInfo> lfdInfos = new ArrayList<>();
+            ModelCommon.lfdResult(lfdInfos, jokeInfos, jokeImageInfos);
+            return lfdInfos;
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<List<LfdInfo>>() {

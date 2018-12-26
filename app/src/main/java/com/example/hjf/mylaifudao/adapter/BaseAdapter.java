@@ -53,6 +53,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         switch (i) {
             case TYPE_ERROR:
                 return new ErrorViewHolder(viewGroup, onClickListener);
+            default:
         }
         return onCreateViewHolderInner(viewGroup, i);
     }

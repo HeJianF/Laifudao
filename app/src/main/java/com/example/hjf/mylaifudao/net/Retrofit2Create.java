@@ -13,7 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public enum Retrofit2Create {
 
-    LAI_FU_DAO(1), OTHER(2);
+    /**
+     * 来福岛
+     */
+    LAI_FU_DAO(1),OTHER(2);
 
     private final Retrofit retrofit;
 

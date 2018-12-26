@@ -1,5 +1,6 @@
 package com.example.hjf.mylaifudao.vh;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.util.Log;
@@ -36,7 +37,11 @@ public class TextViewHolder extends BaseViewHolder<LfdInfo> implements View.OnCl
             TextInfo info = (TextInfo) object;
             title.setTag(info);
             title.setText(info.getTitle());
-            content.setText(Html.fromHtml(info.getContent(),Html.FROM_HTML_MODE_COMPACT));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                content.setText(Html.fromHtml(info.getContent(), Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                content.setText(Html.fromHtml(info.getContent()));
+            }
             title.setOnClickListener(this);
             content.setOnClickListener(this);
         }
@@ -55,6 +60,7 @@ public class TextViewHolder extends BaseViewHolder<LfdInfo> implements View.OnCl
             case R.id.my_content:
                 Log.d("TextViewHolder", "onClick: 点击了文本笑话：内容");
                 break;
+            default:
         }
         mListener.onClick(v);
     }
