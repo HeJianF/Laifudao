@@ -28,7 +28,6 @@ public abstract class BaseViewHolder<E> extends RecyclerView.ViewHolder {
 
     public BaseViewHolder(@LayoutRes int layoutId, ViewGroup parent, View.OnClickListener listener) {
         this(layoutId, parent, listener, true);
-
     }
 
     public BaseViewHolder(@LayoutRes int layoutId, ViewGroup parent, View.OnClickListener listener,

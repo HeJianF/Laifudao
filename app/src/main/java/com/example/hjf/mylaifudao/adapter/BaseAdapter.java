@@ -120,6 +120,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
                 case R.id.fl_error:
                     errorListener.onRetryListener();
                     break;
+                default:
             }
         }
     };

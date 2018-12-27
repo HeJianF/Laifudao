@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLfdAdapter.setErrorListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         recyclerView.setAdapter(mLfdAdapter);
-
         loadData();
     }
 

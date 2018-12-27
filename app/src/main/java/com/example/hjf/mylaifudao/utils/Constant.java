@@ -15,4 +15,9 @@ public interface Constant {
      * 图片笑话
      */
     int TYPE_IMAGE = 2;
+
+    /**
+     * 广告
+     */
+    int TYPE_AD = 3;
 }

@@ -25,6 +25,9 @@ public class ModelCommon {
      */
     public static void lfdResult(List<LfdInfo> lfdInfos, List<TextInfo> textInfos, List<ImageInfo> imageInfos) {
         for (int i = 0; i < textInfos.size(); i++) {
+            if (i == 5) {
+                lfdInfos.add(new LfdInfo(Constant.TYPE_AD, null));
+            }
             lfdInfos.add(new LfdInfo(Constant.TYPE_TEXT, textInfos.get(i)));
             lfdInfos.add(new LfdInfo(Constant.TYPE_IMAGE, imageInfos.get(i)));
         }
