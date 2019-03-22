@@ -1,6 +1,5 @@
 package com.example.hjf.mylaifudao.vh;
 
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hjf.mylaifudao.R;
@@ -13,8 +12,8 @@ import com.example.hjf.mylaifudao.been.LfdInfo;
  */
 public class AdViewHolder extends BaseViewHolder<LfdInfo> {
 
-    public AdViewHolder(int layoutId, ViewGroup parent) {
-        super(layoutId, parent);
+    public AdViewHolder(ViewGroup parent) {
+        super(R.layout.ad_item, parent);
     }
 
     @Override

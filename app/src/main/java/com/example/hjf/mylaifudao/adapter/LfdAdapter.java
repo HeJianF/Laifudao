@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hjf.mylaifudao.R;
 import com.example.hjf.mylaifudao.been.LfdInfo;
 import com.example.hjf.mylaifudao.utils.Constant;
 import com.example.hjf.mylaifudao.vh.AdViewHolder;
@@ -38,8 +37,8 @@ public class LfdAdapter extends BaseAdapter<LfdInfo> {
                 return new TextViewHolder(parent, mListener);
             case Constant.TYPE_IMAGE:
                 return new ImageViewHolder(parent, mListener);
-                case Constant.TYPE_AD:
-                    return new AdViewHolder(R.layout.ad_item,parent);
+            case Constant.TYPE_AD:
+                return new AdViewHolder(parent);
             default:
                 return null;
         }
