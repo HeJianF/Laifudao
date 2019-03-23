@@ -18,6 +18,6 @@ public class AdViewHolder extends BaseViewHolder<LfdInfo> {
 
     @Override
     public void bind(LfdInfo data) {
-
     }
+
 }

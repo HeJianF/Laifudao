@@ -1,75 +1,56 @@
-package com.example.hjf.mylaifudao;
+package com.example.hjf.mylaifudao.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.hjf.mylaifudao.R;
 import com.example.hjf.mylaifudao.adapter.BaseAdapter;
 import com.example.hjf.mylaifudao.adapter.LfdAdapter;
+import com.example.hjf.mylaifudao.base.BaseActivity;
 import com.example.hjf.mylaifudao.been.ImageInfo;
 import com.example.hjf.mylaifudao.been.LfdInfo;
 import com.example.hjf.mylaifudao.been.TextInfo;
-import com.example.hjf.mylaifudao.model.ModelCommon;
-import com.example.hjf.mylaifudao.net.JokeApi;
-import com.example.hjf.mylaifudao.net.Retrofit2Create;
-import com.example.hjf.mylaifudao.rx.SimpleObserver;
+import com.example.hjf.mylaifudao.ui.callback.MainCallBack;
+import com.example.hjf.mylaifudao.ui.presenter.MainPresenter;
 import com.example.hjf.mylaifudao.utils.ToastUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.schedulers.Schedulers;
+import butterknife.BindView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, BaseAdapter.OnAdapterErrorListener {
+public class MainActivity extends BaseActivity<MainPresenter> implements MainCallBack, View.OnClickListener, BaseAdapter.OnAdapterErrorListener {
+
+    @BindView(R.id.test_recycler)
+    RecyclerView test_recycler;
 
     private LfdAdapter mLfdAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        RecyclerView recyclerView = findViewById(R.id.test_recycler);
-        mLfdAdapter = new LfdAdapter(this);
-        mLfdAdapter.setErrorListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        recyclerView.setAdapter(mLfdAdapter);
-        loadData();
     }
 
-    public void loadData() {
-        final JokeApi jokeApi = Retrofit2Create.LAI_FU_DAO.create(JokeApi.class);
+    @Override
+    public int provideLayoutId() {
+        return R.layout.activity_main;
+    }
 
-        Observable.zip(jokeApi.getTextData(), jokeApi.getImageData(), (jokeInfos, jokeImageInfos) -> {
-            //数据转换
-            List<LfdInfo> lfdInfos = new ArrayList<>();
-            ModelCommon.lfdResult(lfdInfos, jokeInfos, jokeImageInfos);
-            return lfdInfos;
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SimpleObserver<List<LfdInfo>>() {
+    @Override
+    protected void initOnCreate(Bundle savedInstanceState) {
+        mLfdAdapter = new LfdAdapter(this);
+        mLfdAdapter.setErrorListener(this);
+        test_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        test_recycler.setAdapter(mLfdAdapter);
 
-                    @Override
-                    protected void onHandleSuccess(List<LfdInfo> lfdInfos) {
-                        mLfdAdapter.setList(lfdInfos);
-                    }
+        mPresenter.start();
+    }
 
-                    @Override
-                    protected void onHandleError(Throwable e, boolean netAvailable) {
-                        if (netAvailable) {
-                            mLfdAdapter.onShowError(e.getMessage());
-                        } else {
-                            mLfdAdapter.onShowError("网络未连接     " + e.getMessage());
-                        }
-                    }
-
-                });
+    @Override
+    protected MainPresenter providePresenter() {
+        return new MainPresenter();
     }
 
     @Override
@@ -109,6 +90,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRetryListener() {
         Toast.makeText(this, "重新加载中...", Toast.LENGTH_SHORT).show();
-        loadData();
+        mPresenter.loadData();
+    }
+
+    @Override
+    public void loadDataSuccess(List<LfdInfo> data) {
+        mLfdAdapter.setList(data);
+    }
+
+    @Override
+    public void loadDataError(String message) {
+        mLfdAdapter.onShowError(message);
     }
 }

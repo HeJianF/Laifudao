@@ -55,10 +55,10 @@ public class LfdAdapter extends BaseAdapter<LfdInfo> {
     @Override
     protected void onBindViewHolderInner(@NonNull BaseViewHolder baseViewHolder, int i) {
         if (baseViewHolder instanceof TextViewHolder) {
-            ((TextViewHolder) baseViewHolder).bind(mList.get(i));
+            baseViewHolder.bind(mList.get(i));
             return;
         } else if (baseViewHolder instanceof ImageViewHolder) {
-            ((ImageViewHolder) baseViewHolder).bind(mList.get(i));
+            baseViewHolder.bind(mList.get(i));
             return;
         } else if (baseViewHolder instanceof AdViewHolder) {
             return;

@@ -1,4 +1,4 @@
-package com.example.hjf.mylaifudao.app.base;
+package com.example.hjf.mylaifudao.base.mvp;
 
 /**
  * Every presenter in the app must either implement this interface or extend BasePresenter

@@ -1,8 +1,11 @@
-package com.example.hjf.mylaifudao.app.base;
+package com.example.hjf.mylaifudao.base.mvp;
 
+import android.util.Log;
+
+import com.example.hjf.mylaifudao.base.mvp.rxlifecycle.PresenterEvent;
+import com.example.hjf.mylaifudao.base.mvp.rxlifecycle.RxLifecyclePresenter;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.trello.rxlifecycle3.LifecycleTransformer;
-import com.trello.rxlifecycle3.OutsideLifecycleException;
 import com.trello.rxlifecycle3.RxLifecycle;
 
 import androidx.annotation.NonNull;
@@ -15,23 +18,21 @@ import io.reactivex.subjects.BehaviorSubject;
  */
 public abstract class MvPPresenter<V extends MvpView> implements IMVPPresenter<V>, LifecycleProvider<Integer> {
 
-    private static final int ATTACH = 1;
-    private static final int DETACH = 0;
-
     private final BehaviorSubject<Integer> behaviorSubject = BehaviorSubject.create();
 
     private V mMvpView;
 
-
     @Override
     public void attachView(V mvpView) {
-        mvpView = mMvpView;
-        behaviorSubject.onNext(ATTACH);
+        Log.d("MvPPresenter", "attachView: ");
+        mMvpView = mvpView;
+        behaviorSubject.onNext(PresenterEvent.ATTACH);
     }
 
     @Override
     public void detachView() {
-        behaviorSubject.onNext(DETACH);
+        Log.d("MvPPresenter", "detachView: ");
+        behaviorSubject.onNext(PresenterEvent.DETACH);
     }
 
     public V getMvpView() {
@@ -47,16 +48,7 @@ public abstract class MvPPresenter<V extends MvpView> implements IMVPPresenter<V
     @NonNull
     @Override
     public <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycle.bind(behaviorSubject, integer -> {
-            switch (integer) {
-                case ATTACH:
-                    return DETACH;
-                case DETACH:
-                    throw new OutsideLifecycleException("Cannot bind to Presenter lifecycle when outside of it.");
-                default:
-                    throw new UnsupportedOperationException("Binding to " + integer + " not yet implemented");
-            }
-        });
+        return RxLifecyclePresenter.bindPresenter(behaviorSubject);
     }
 
     @NonNull

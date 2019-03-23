@@ -1,4 +1,4 @@
-package com.example.hjf.mylaifudao.app.base;
+package com.example.hjf.mylaifudao.base.mvp;
 
 /**
  * Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
