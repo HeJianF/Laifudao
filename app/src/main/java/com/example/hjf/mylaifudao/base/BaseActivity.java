@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.hjf.mylaifudao.base.mvp.MvPPresenter;
+import com.example.hjf.mylaifudao.base.mvp.BaseLifecyclePresenter;
 import com.example.hjf.mylaifudao.base.mvp.MvpView;
 
 import butterknife.ButterKnife;
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  * @date 2019/3/24
  */
 @SuppressLint("Registered")
-public abstract class BaseActivity<P extends MvPPresenter> extends AppCompatActivity implements MvpView {
+public abstract class BaseActivity<P extends BaseLifecyclePresenter> extends AppCompatActivity implements MvpView {
 
     protected P mPresenter;
 

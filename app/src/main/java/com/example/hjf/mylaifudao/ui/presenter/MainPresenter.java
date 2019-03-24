@@ -1,8 +1,6 @@
 package com.example.hjf.mylaifudao.ui.presenter;
 
-import android.util.Log;
-
-import com.example.hjf.mylaifudao.base.mvp.MvPPresenter;
+import com.example.hjf.mylaifudao.base.mvp.BaseLifecyclePresenter;
 import com.example.hjf.mylaifudao.base.mvp.rxlifecycle.PresenterEvent;
 import com.example.hjf.mylaifudao.been.LfdInfo;
 import com.example.hjf.mylaifudao.model.ModelCommon;
@@ -22,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author heJianfeng
  * @date 2019/3/24
  */
-public class MainPresenter extends MvPPresenter<MainCallBack> {
+public class MainPresenter extends BaseLifecyclePresenter<MainCallBack> {
 
     @Override
     public void start() {
@@ -45,13 +43,11 @@ public class MainPresenter extends MvPPresenter<MainCallBack> {
 
                     @Override
                     protected void onHandleSuccess(List<LfdInfo> lfdInfos) {
-                        Log.d("MainPresenter", "onHandleSuccess: ");
                         getMvpView().loadDataSuccess(lfdInfos);
                     }
 
                     @Override
                     protected void onHandleError(Throwable e, boolean netAvailable) {
-                        Log.d("MainPresenter", "onHandleError: ");
                         if (netAvailable) {
                             getMvpView().loadDataError(e.getMessage());
                         } else {

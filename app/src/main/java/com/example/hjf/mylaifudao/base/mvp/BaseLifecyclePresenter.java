@@ -1,7 +1,5 @@
 package com.example.hjf.mylaifudao.base.mvp;
 
-import android.util.Log;
-
 import com.example.hjf.mylaifudao.base.mvp.rxlifecycle.PresenterEvent;
 import com.example.hjf.mylaifudao.base.mvp.rxlifecycle.RxLifecyclePresenter;
 import com.trello.rxlifecycle3.LifecycleProvider;
@@ -13,30 +11,27 @@ import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
 /**
+ * 继承此类，可以实现自动管理MVP的生命周期
+ *
  * @author heJianfeng
  * @date 2019/3/22
  */
-public abstract class MvPPresenter<V extends MvpView> implements IMVPPresenter<V>, LifecycleProvider<Integer> {
+public abstract class BaseLifecyclePresenter<V extends MvpView> extends BasePresenter<V> implements LifecycleProvider<Integer> {
 
     private final BehaviorSubject<Integer> behaviorSubject = BehaviorSubject.create();
 
-    private V mMvpView;
+    public abstract void start();
 
     @Override
     public void attachView(V mvpView) {
-        Log.d("MvPPresenter", "attachView: ");
-        mMvpView = mvpView;
+        super.attachView(mvpView);
         behaviorSubject.onNext(PresenterEvent.ATTACH);
     }
 
     @Override
     public void detachView() {
-        Log.d("MvPPresenter", "detachView: ");
+        super.detachView();
         behaviorSubject.onNext(PresenterEvent.DETACH);
-    }
-
-    public V getMvpView() {
-        return mMvpView;
     }
 
     @NonNull
