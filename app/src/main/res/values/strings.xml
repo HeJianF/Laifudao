@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyLaifudao</string>
+    <string name="net_err">网络错误，点击屏幕重新加载</string>
 </resources>

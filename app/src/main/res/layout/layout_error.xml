@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fl_error"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/error_text"
@@ -12,6 +13,6 @@
         android:layout_gravity="center"
         android:drawableTop="@mipmap/ic_launcher"
         android:gravity="center"
-        android:text="网络错误，点击屏幕重新加载" />
+        android:text="@string/net_err" />
 
 </FrameLayout>

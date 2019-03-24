@@ -1,6 +1,9 @@
 package com.example.hjf.mylaifudao.ui.presenter;
 
+import android.util.Log;
+
 import com.example.hjf.mylaifudao.base.mvp.MvPPresenter;
+import com.example.hjf.mylaifudao.base.mvp.rxlifecycle.PresenterEvent;
 import com.example.hjf.mylaifudao.been.LfdInfo;
 import com.example.hjf.mylaifudao.model.ModelCommon;
 import com.example.hjf.mylaifudao.net.JokeApi;
@@ -36,15 +39,19 @@ public class MainPresenter extends MvPPresenter<MainCallBack> {
             return lfdInfos;
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                //.compose(bindToLifecycle())
+                .compose(bindUntilEvent(PresenterEvent.DETACH))
                 .subscribe(new SimpleObserver<List<LfdInfo>>() {
 
                     @Override
                     protected void onHandleSuccess(List<LfdInfo> lfdInfos) {
+                        Log.d("MainPresenter", "onHandleSuccess: ");
                         getMvpView().loadDataSuccess(lfdInfos);
                     }
 
                     @Override
                     protected void onHandleError(Throwable e, boolean netAvailable) {
+                        Log.d("MainPresenter", "onHandleError: ");
                         if (netAvailable) {
                             getMvpView().loadDataError(e.getMessage());
                         } else {
