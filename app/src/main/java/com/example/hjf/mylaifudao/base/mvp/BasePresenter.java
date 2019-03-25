@@ -1,6 +1,6 @@
 package com.example.hjf.mylaifudao.base.mvp;
 
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 
 /**
  * 继承此类，可以手动管理MVP的生命周期

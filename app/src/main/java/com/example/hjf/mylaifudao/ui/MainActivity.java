@@ -1,10 +1,7 @@
 package com.example.hjf.mylaifudao.ui;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.hjf.mylaifudao.R;
 import com.example.hjf.mylaifudao.adapter.BaseAdapter;
@@ -19,6 +16,8 @@ import com.example.hjf.mylaifudao.utils.ToastUtils;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainCallBack, View.OnClickListener, BaseAdapter.OnAdapterErrorListener {
@@ -89,7 +88,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCal
 
     @Override
     public void onRetryListener() {
-        Toast.makeText(this, "重新加载中...", Toast.LENGTH_SHORT).show();
+        ToastUtils.showToast("重新加载中...");
         mPresenter.loadData();
     }
 

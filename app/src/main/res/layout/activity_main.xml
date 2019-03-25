@@ -7,12 +7,12 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/test_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/pigs">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

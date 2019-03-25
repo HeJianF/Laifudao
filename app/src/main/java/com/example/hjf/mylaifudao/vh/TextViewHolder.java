@@ -1,7 +1,7 @@
 package com.example.hjf.mylaifudao.vh;
 
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;

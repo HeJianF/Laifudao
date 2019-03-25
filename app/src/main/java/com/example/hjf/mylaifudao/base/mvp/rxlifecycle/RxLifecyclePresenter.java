@@ -1,7 +1,7 @@
 package com.example.hjf.mylaifudao.base.mvp.rxlifecycle;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.trello.rxlifecycle3.LifecycleTransformer;
 import com.trello.rxlifecycle3.OutsideLifecycleException;

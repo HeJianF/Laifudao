@@ -2,11 +2,13 @@ package com.example.hjf.mylaifudao.base;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hjf.mylaifudao.base.mvp.BaseLifecyclePresenter;
 import com.example.hjf.mylaifudao.base.mvp.MvpView;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 
@@ -15,7 +17,7 @@ import butterknife.ButterKnife;
  * @date 2019/3/24
  */
 @SuppressLint("Registered")
-public abstract class BaseActivity<P extends BaseLifecyclePresenter> extends AppCompatActivity implements MvpView {
+public abstract class BaseActivity<P extends BaseLifecyclePresenter> extends RxAppCompatActivity implements MvpView {
 
     protected P mPresenter;
 
