@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.hjf.mylaifudao.app.MyApplication;
 
 /**
+ * 优化
  * @author heJianfeng
  * @date 2018/12/25
  */
