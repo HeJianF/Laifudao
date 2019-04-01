@@ -1,6 +1,7 @@
 package com.example.hjf.mylaifudao.adapter;
 
 import androidx.annotation.NonNull;
+
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,6 +25,7 @@ public class LfdAdapter extends BaseAdapter<LfdInfo> {
     public LfdAdapter(View.OnClickListener listener) {
         super();
         mListener = listener;
+        onShowLoading();
     }
 
     public void setList(List<LfdInfo> lfdInfos) {
