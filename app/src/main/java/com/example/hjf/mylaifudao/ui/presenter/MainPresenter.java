@@ -43,15 +43,15 @@ public class MainPresenter extends BaseLifecyclePresenter<MainCallBack> {
 
                     @Override
                     protected void onHandleSuccess(List<LfdInfo> lfdInfos) {
-                        getMvpView().loadDataSuccess(lfdInfos);
+                        getMvpView().showContent(lfdInfos);
                     }
 
                     @Override
                     protected void onHandleError(Throwable e, boolean netAvailable) {
                         if (netAvailable) {
-                            getMvpView().loadDataError(e.getMessage());
+                            getMvpView().showErrorPage(e.getMessage());
                         } else {
-                            getMvpView().loadDataError("网络未连接     " + e.getMessage());
+                            getMvpView().showErrorPage("网络未连接     " + e.getMessage());
                         }
                     }
                 });

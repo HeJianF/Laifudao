@@ -11,8 +11,10 @@ import java.util.List;
  */
 public interface MainCallBack extends MvpView {
 
-    void loadDataSuccess(List<LfdInfo> data);
+    void showContent(List<LfdInfo> data);
 
-    void loadDataError(String message);
+    void showErrorPage(String message);
+
+    void showEmptyPage(String emptyInfo);
 
 }

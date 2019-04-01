@@ -93,12 +93,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCal
     }
 
     @Override
-    public void loadDataSuccess(List<LfdInfo> data) {
+    public void showContent(List<LfdInfo> data) {
         mLfdAdapter.setList(data);
     }
 
     @Override
-    public void loadDataError(String message) {
+    public void showEmptyPage(String emptyInfo) {
+
+    }
+
+    @Override
+    public void showErrorPage(String message) {
         mLfdAdapter.onShowError(message);
     }
+
 }
